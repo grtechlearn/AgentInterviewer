@@ -5,6 +5,8 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'AgentInterviewer - AI Interview Practice',
   description: 'Master your next tech interview with AI-powered practice',
+  manifest: '/manifest.json',
+  themeColor: '#3B82F6',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -30,20 +32,56 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Link href="/dashboard" className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
                   Dashboard
                 </Link>
-                <Link href="/quiz" className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
-                  Quiz
+                <Link href="/goals" className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
+                  Goals
                 </Link>
-                <Link href="/chat" className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
-                  Chat
+                <Link href="/leaderboard" className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
+                  Leaderboard
+                </Link>
+                <Link href="/forums" className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
+                  Forums
+                </Link>
+                <Link href="/groups" className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
+                  Groups
                 </Link>
               </div>
-              <button className="px-5 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
-                Login
-              </button>
+              <div className="flex items-center gap-2">
+                <Link href="/pricing" className="hidden md:block px-4 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 rounded-lg hover:bg-blue-50 transition-colors">
+                  Pricing
+                </Link>
+                <Link href="/login" className="px-5 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
+                  Login
+                </Link>
+              </div>
             </div>
           </div>
         </nav>
-        <main>{children}</main>
+        <main className="pb-20 md:pb-0">{children}</main>
+        {/* Mobile bottom navigation */}
+        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-50">
+          <div className="flex items-center justify-around h-16">
+            <Link href="/" className="flex flex-col items-center gap-1 text-gray-500 hover:text-blue-500">
+              <span className="text-lg">🏠</span>
+              <span className="text-[10px]">Home</span>
+            </Link>
+            <Link href="/interview" className="flex flex-col items-center gap-1 text-gray-500 hover:text-blue-500">
+              <span className="text-lg">🎯</span>
+              <span className="text-[10px]">Interview</span>
+            </Link>
+            <Link href="/dashboard" className="flex flex-col items-center gap-1 text-gray-500 hover:text-blue-500">
+              <span className="text-lg">📊</span>
+              <span className="text-[10px]">Dashboard</span>
+            </Link>
+            <Link href="/chat" className="flex flex-col items-center gap-1 text-gray-500 hover:text-blue-500">
+              <span className="text-lg">💬</span>
+              <span className="text-[10px]">Chat</span>
+            </Link>
+            <Link href="/profile" className="flex flex-col items-center gap-1 text-gray-500 hover:text-blue-500">
+              <span className="text-lg">👤</span>
+              <span className="text-[10px]">Profile</span>
+            </Link>
+          </div>
+        </nav>
       </body>
     </html>
   );

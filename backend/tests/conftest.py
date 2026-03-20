@@ -117,3 +117,33 @@ def quiz_master_agent():
 def chatbot_agent():
     from backend.agents.chatbot import ChatBotAgent
     return ChatBotAgent()
+
+
+@pytest.fixture
+def salary_coach_agent():
+    from backend.agents.salary_coach import SalaryCoachAgent
+    return SalaryCoachAgent()
+
+
+@pytest.fixture
+def resume_analyzer_agent():
+    from backend.agents.resume_analyzer import ResumeAnalyzerAgent
+    return ResumeAnalyzerAgent()
+
+
+@pytest.fixture
+def forum_posting_agent():
+    from backend.agents.forum_posting import ForumPostingAgent
+    return ForumPostingAgent()
+
+
+@pytest.fixture
+def group_manager_agent():
+    from backend.agents.group_manager import GroupManagerAgent
+    return GroupManagerAgent()
+
+
+@pytest.fixture
+def admin_analytics_agent():
+    from backend.agents.admin_analytics import AdminAnalyticsAgent
+    return AdminAnalyticsAgent()

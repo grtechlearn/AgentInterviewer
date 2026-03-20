@@ -33,6 +33,11 @@ from agents.motivator import MotivatorAgent
 from agents.skill_monitor import SkillMonitorAgent
 from agents.quiz_master import QuizMasterAgent
 from agents.chatbot import ChatBotAgent
+from agents.salary_coach import SalaryCoachAgent
+from agents.resume_analyzer import ResumeAnalyzerAgent
+from agents.forum_posting import ForumPostingAgent
+from agents.group_manager import GroupManagerAgent
+from agents.admin_analytics import AdminAnalyticsAgent
 
 logger = logging.getLogger("agentx")
 
@@ -78,6 +83,31 @@ def _route_skill_monitor(msg: AgentMessage, ctx: AgentContext) -> bool:
 def _route_quiz_master(msg: AgentMessage, ctx: AgentContext) -> bool:
     action = msg.data.get("action", "")
     return action in ("start_quiz", "submit_answer", "get_results")
+
+
+def _route_salary_coach(msg: AgentMessage, ctx: AgentContext) -> bool:
+    action = msg.data.get("action", "")
+    return action in ("start_negotiation", "respond", "get_tips")
+
+
+def _route_resume_analyzer(msg: AgentMessage, ctx: AgentContext) -> bool:
+    action = msg.data.get("action", "")
+    return action in ("analyze_resume", "get_tailored_questions")
+
+
+def _route_forum_posting(msg: AgentMessage, ctx: AgentContext) -> bool:
+    action = msg.data.get("action", "")
+    return action in ("daily_challenge", "topic_discussion", "weekly_summary", "social_post")
+
+
+def _route_group_manager(msg: AgentMessage, ctx: AgentContext) -> bool:
+    action = msg.data.get("action", "")
+    return action in ("create_group", "add_member", "get_group_stats", "set_group_task", "get_leaderboard")
+
+
+def _route_admin_analytics(msg: AgentMessage, ctx: AgentContext) -> bool:
+    action = msg.data.get("action", "")
+    return action in ("system_overview", "user_report", "agent_performance", "cost_report")
 
 
 # ------------------------------------------------------------------
@@ -167,6 +197,11 @@ async def setup_and_run() -> None:
         SkillMonitorAgent(),
         QuizMasterAgent(),
         ChatBotAgent(),
+        SalaryCoachAgent(),
+        ResumeAnalyzerAgent(),
+        ForumPostingAgent(),
+        GroupManagerAgent(),
+        AdminAnalyticsAgent(),
     )
 
     # Set up routing rules (higher priority = checked first)
@@ -178,6 +213,11 @@ async def setup_and_run() -> None:
     orchestrator.add_route("motivator", _route_motivator, priority=7)
     orchestrator.add_route("skill_monitor", _route_skill_monitor, priority=7)
     orchestrator.add_route("quiz_master", _route_quiz_master, priority=9)
+    orchestrator.add_route("salary_coach", _route_salary_coach, priority=7)
+    orchestrator.add_route("resume_analyzer", _route_resume_analyzer, priority=8)
+    orchestrator.add_route("forum_posting", _route_forum_posting, priority=6)
+    orchestrator.add_route("group_manager", _route_group_manager, priority=6)
+    orchestrator.add_route("admin_analytics", _route_admin_analytics, priority=5)
 
     # Fallback to chatbot for unmatched messages
     orchestrator.set_fallback("chatbot")
