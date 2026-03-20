@@ -147,3 +147,15 @@ def group_manager_agent():
 def admin_analytics_agent():
     from backend.agents.admin_analytics import AdminAnalyticsAgent
     return AdminAnalyticsAgent()
+
+
+@pytest.fixture
+def panel_interviewer_agent():
+    from backend.agents.panel_interviewer import PanelInterviewerAgent
+    return PanelInterviewerAgent()
+
+
+@pytest.fixture
+def multi_round_agent():
+    from backend.agents.multi_round import MultiRoundAgent
+    return MultiRoundAgent()

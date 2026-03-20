@@ -14,6 +14,8 @@ from .resume_analyzer import ResumeAnalyzerAgent
 from .forum_posting import ForumPostingAgent
 from .group_manager import GroupManagerAgent
 from .admin_analytics import AdminAnalyticsAgent
+from .panel_interviewer import PanelInterviewerAgent
+from .multi_round import MultiRoundAgent
 
 __all__ = [
     "InterviewerAgent",
@@ -30,4 +32,6 @@ __all__ = [
     "ForumPostingAgent",
     "GroupManagerAgent",
     "AdminAnalyticsAgent",
+    "PanelInterviewerAgent",
+    "MultiRoundAgent",
 ]

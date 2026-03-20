@@ -38,6 +38,8 @@ from agents.resume_analyzer import ResumeAnalyzerAgent
 from agents.forum_posting import ForumPostingAgent
 from agents.group_manager import GroupManagerAgent
 from agents.admin_analytics import AdminAnalyticsAgent
+from agents.panel_interviewer import PanelInterviewerAgent
+from agents.multi_round import MultiRoundAgent
 
 logger = logging.getLogger("agentx")
 
@@ -108,6 +110,16 @@ def _route_group_manager(msg: AgentMessage, ctx: AgentContext) -> bool:
 def _route_admin_analytics(msg: AgentMessage, ctx: AgentContext) -> bool:
     action = msg.data.get("action", "")
     return action in ("system_overview", "user_report", "agent_performance", "cost_report")
+
+
+def _route_panel_interviewer(msg: AgentMessage, ctx: AgentContext) -> bool:
+    action = msg.data.get("action", "")
+    return action in ("start_panel", "panel_question", "panel_evaluate")
+
+
+def _route_multi_round(msg: AgentMessage, ctx: AgentContext) -> bool:
+    action = msg.data.get("action", "")
+    return action in ("start_pipeline", "next_round", "get_pipeline_status", "pipeline_report")
 
 
 # ------------------------------------------------------------------
@@ -202,6 +214,8 @@ async def setup_and_run() -> None:
         ForumPostingAgent(),
         GroupManagerAgent(),
         AdminAnalyticsAgent(),
+        PanelInterviewerAgent(),
+        MultiRoundAgent(),
     )
 
     # Set up routing rules (higher priority = checked first)
@@ -218,6 +232,8 @@ async def setup_and_run() -> None:
     orchestrator.add_route("forum_posting", _route_forum_posting, priority=6)
     orchestrator.add_route("group_manager", _route_group_manager, priority=6)
     orchestrator.add_route("admin_analytics", _route_admin_analytics, priority=5)
+    orchestrator.add_route("panel_interviewer", _route_panel_interviewer, priority=9)
+    orchestrator.add_route("multi_round", _route_multi_round, priority=9)
 
     # Fallback to chatbot for unmatched messages
     orchestrator.set_fallback("chatbot")
