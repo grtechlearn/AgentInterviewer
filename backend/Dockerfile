@@ -2,17 +2,17 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Copy agentx framework
-COPY ../../agentx /app/agentx
+# Install git for pip to clone from GitHub
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
 
-# Copy backend
-COPY . /app/backend
+# Install AgentX framework from GitHub
+RUN pip install --no-cache-dir "agentx @ git+https://github.com/grtechlearn/agentx.git@main"
 
-# Install dependencies
-RUN pip install --no-cache-dir -e /app/agentx && \
-    pip install --no-cache-dir aiohttp>=3.9.0
+# Install additional dependencies
+RUN pip install --no-cache-dir aiohttp>=3.9.0
 
-WORKDIR /app/backend
+# Copy backend code
+COPY . /app
 
 EXPOSE 8081
 

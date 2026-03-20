@@ -6,9 +6,8 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - PYTHONPATH=/app/agentx
-    volumes:
-      - ./backend:/app
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - AGENTX_PORT=8081
     restart: unless-stopped
 
   frontend:

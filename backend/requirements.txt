@@ -1,2 +1,2 @@
--e ../../agentx
+agentx @ git+https://github.com/grtechlearn/agentx.git@main
 aiohttp>=3.9.0
